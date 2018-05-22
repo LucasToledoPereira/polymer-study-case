@@ -1,0 +1,44 @@
+
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../components/select/select.html">
+<link rel="import" href="../components/demo-snippet-view/demo-snippet-view.html">
+
+<dom-module id="select-demo">
+  <template>
+    <demo-snippet-view readme="src/components/select/README.md">
+        <h3 slot="title">Select Basic Demo</h3>
+        <div slot="component">
+            <custom-select items='[[items]]'></custom-select>
+            <button on-click="addItem">Add pizza</button>
+        </div>
+    </demo-snippet-view>
+  </template>
+
+  <script> 
+    class SelectDemo extends Polymer.Element {
+        static get is() { return 'select-demo'; }
+
+        static get properties() {
+          return {
+            items: {
+              type: Array,
+              value() {
+                return [{"name": "Arroz", "value": 999}]
+              }
+            }
+          }
+        }
+
+        constructor() {
+            super();
+        }
+
+        addItem() {
+          this.push('items', {name: 'Pizza', value: 1, ordered: 0});
+        }
+
+    }
+    
+    customElements.define(SelectDemo.is, SelectDemo);
+  </script>
+</dom-module>

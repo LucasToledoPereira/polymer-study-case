@@ -1,7 +1,7 @@
 {
-  "name": "My App",
-  "short_name": "My App",
-  "description": "My App description",
+  "name": "Polymer Webcomponent Framework",
+  "short_name": "Framework",
+  "description": "Webcomponents implemented using Polymer v2.0",
   "icons": [
     {
       "src": "images/manifest/icon-192x192.png",

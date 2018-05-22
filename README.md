@@ -46,10 +46,18 @@ If running Windows you will need to set the following environment variables:
 
 Read More here [daffl/launchpad](https://github.com/daffl/launchpad#environment-variables-impacting-local-browsers-detection)
 
-### Components
 
-- [Select](src/components/select)
+## Components
+
+- [DgtSelect](src/components/dgt-select)
+
 
 
 ## Authors
 * Supero TI - **Lucas Toledo Pereira** - [Github - LucasToledoPereira](https://github.com/LucasToledoPereira)
+
+
+
+
+
+For more information about Polymer see [Polymer Github](https://github.com/Polymer/polymer)

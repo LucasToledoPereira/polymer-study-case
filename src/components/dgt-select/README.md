@@ -1,4 +1,4 @@
-## Custom Select
+## Dgt Select
 This component implements a HTML Select and Options using Polymer Webcomponents
 
 ### Attributes

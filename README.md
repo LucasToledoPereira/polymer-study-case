@@ -34,17 +34,11 @@ This command serves your app. Replace `build-folder-name` with the folder name o
 
 ### Run tests
 
-This command will run [Web Component Tester](https://github.com/Polymer/web-component-tester)
-against the browsers currently installed on your machine:
+First install [Web Component Tester](https://github.com/Polymer/tools/tree/master/packages/web-component-tester) by runnig:
 
-    polymer test
+    npm install -g web-component-tester
 
-If running Windows you will need to set the following environment variables:
-
-- LAUNCHPAD_BROWSERS
-- LAUNCHPAD_CHROME
-
-Read More here [daffl/launchpad](https://github.com/daffl/launchpad#environment-variables-impacting-local-browsers-detection)
+Than execute *wct* command at the root of the project
 
 
 ## Components
@@ -55,8 +49,6 @@ Read More here [daffl/launchpad](https://github.com/daffl/launchpad#environment-
 
 ## Authors
 * Supero TI - **Lucas Toledo Pereira** - [Github - LucasToledoPereira](https://github.com/LucasToledoPereira)
-
-
 
 
 

@@ -135,8 +135,10 @@
         elOptions.forEach(el => {
           if(el.text.toLowerCase().indexOf(searchTerm) === -1){
             el.setAttribute('hidden', true);
+            el.style.visibility = 'hidden';
           } else {
             el.removeAttribute('hidden');
+            el.style.visibility = "";
           }
 
           if(this.isIE){

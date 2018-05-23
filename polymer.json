@@ -4,7 +4,7 @@
   "fragments": [
 	  "src/components/dgt-select/dgt-select.html",
     "src/components/demo-snippet-view/demo-snippet-view.html",
-    "src/demos/select-demo.html",
+    "src/demos/dgt-select-demo.html",
     "src/error-view.html"
   ],
   "sources": [

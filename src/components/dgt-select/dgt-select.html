@@ -1,13 +1,14 @@
 <!-- Load the Polymer.Element base class -->
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../../bower_components/polymer/lib/elements/dom-repeat.html">
-<link rel="stylesheet" href="css/dgt-select.css">
+<link rel="import" href="dgt-select-style.html">
 
 <dom-module id="dgt-select">
   <!-- Defines the element's style and local DOM -->
   <template>
-    <template is="dom-if" if="{{dgt-error}}">
-			<div class="dgt-error-msg">{{dgt-error}}</div>
+    <style include="dgt-select-style"></style>
+    <template is="dom-if" if="{{dgterror}}">
+			<div class="dgt-error-msg">{{dgterror}}</div>
     </template>
     
     <select
@@ -37,15 +38,6 @@
     <div id="declaredOptionsWrapper">
         <content select="option"></content>
     </div>
-    
-
-    <!--div>
-      <select>
-        <template is="dom-repeat" id="items" items="[[items]]">
-          <option value="{{item.value}}">{{item.name}}</option>
-        </template>
-      </select>
-    </div -->
   </template>
   <script>
     
@@ -63,7 +55,12 @@
           searchBar: Boolean,
 					valueName: String,
 					labelName: String,
-          multiple: Boolean
+          multiple: Boolean,
+          disabled: Boolean,
+          autofocus: Boolean,
+          required: Boolean,
+          size: Boolean,
+          dgterror: Object
         }
       }
 
@@ -358,7 +355,7 @@
         let error = "";
         if(this.select.required){
           this.classList.remove('invalid');
-          this.removeAttribute('dgt-error');
+          this.removeAttribute('dgterror');
           if(this.getSelectedItems().length == 0){
             console.log('erro de validacao');
             //TODO necessário realizar a internacionalização da mensagem
@@ -366,7 +363,7 @@
               id: this.id,
               msg: 'Selecione um item'
             };
-            this.setAttribute('dgt-error', error.msg);
+            this.setAttribute('dgterror', error.msg);
             this.classList.add('invalid');
           }
         }
@@ -379,7 +376,7 @@
         elOptions.forEach(el => el.selected = false);
 
         this.classList.remove('invalid');
-        this.removeAttribute('dgt-error');
+        this.removeAttribute('dgterror');
         
         let input = this.querySelector('input');
         if(input){

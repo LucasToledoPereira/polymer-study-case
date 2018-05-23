@@ -3,7 +3,7 @@
 <link rel="import" href="../components/demo-snippet-view/demo-snippet-view.html">
 <link rel="import" href="../components/dgt-select/dgt-select.html">
 
-<dom-module id="select-demo">
+<dom-module id="dgt-select-demo">
   <template>
     <demo-snippet-view readme="src/components/dgt-select/README.md">
         <h3 slot="title">Select Basic Demo</h3>
@@ -43,10 +43,8 @@
             <dgt-select id="ex4"  size="4" label="Meu select" multiple search-bar></dgt-select>
             <!--Fifth Demo Example-->
             <h4 class="mar-bot">Campo obrigatório</h4>
-            <form>
-              <dgt-select id="ex5" label="Meu select" multiple required></dgt-select>
-              <button class="btn btn-sm style-scope" type="submit">Ok</button>
-            </form>
+            <dgt-select id="ex5" label="Meu select" multiple required></dgt-select>
+            <button on-click="submit" class="btn btn-sm style-scope">Ok</button>
             <hr>
             <h4 class="mar-bot">Desabilitado</h4>
             <dgt-select id="ex6" label="Meu select" disabled></dgt-select>
@@ -63,7 +61,7 @@
   <script> 
     class SelectDemo extends Polymer.Element {
       constructor() { super(); }
-      static get is() { return 'select-demo'; }
+      static get is() { return 'dgt-select-demo'; }
 
       static get properties() {
         return {
@@ -352,6 +350,10 @@
             element.addItems(['Brasil', 'Argentina', 'Uruguay', 'Chile']);
           }
         }
+      }
+
+      submit() {
+        this.getSelect('ex5').validate();
       }
 
     }

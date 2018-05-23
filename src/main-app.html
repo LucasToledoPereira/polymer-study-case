@@ -22,7 +22,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="icons-svg.html">
 
-<link rel="lazy-import" href="demos/select-demo.html">
+<link rel="lazy-import" href="demos/dgt-select-demo.html">
 <link rel="lazy-import" href="error-view.html">
 
 <dom-module id="main-app">
@@ -82,7 +82,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
         <app-toolbar>Components</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="select-demo" href="[[rootPath]]select-demo">Select</a>
+          <a name="dgt-select-demo" href="[[rootPath]]dgt-select-demo">Select</a>
         </iron-selector>
       </app-drawer>
 
@@ -101,7 +101,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             attr-for-selected="name"
             fallback-selection="error-view"
             role="main">
-          <select-demo name="select-demo"></select-demo>
+          <dgt-select-demo name="dgt-select-demo"></dgt-select-demo>
           <error-view name="error-view"></error-view>
         </iron-pages>
       </app-header-layout>
@@ -140,7 +140,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       _routePageChanged(page) {
         // If no page was found in the route data, page will be an empty string.
         // Default to 'view1' in that case.
-        this.page = page || 'select-demo';
+        this.page = page || 'dgt-select-demo';
 
         // Close a non-persistent drawer when the page & route are changed.
         if (!this.$.drawer.persistent) {

@@ -98,7 +98,7 @@
 				if(evt.target.selectedIndex >= 0) {
           let options = this.shadowRoot.querySelectorAll('option');
 					//var options = this.querySelectorAll('option');
-          this._fireEvent('selectItem', {rawValue: options[evt.target.selectedIndex].rawValue});
+          this._fireEvent('selectItem', options[evt.target.selectedIndex].rawValue);
 				}
 			}
 
@@ -424,7 +424,7 @@
 
       _fireEvent(eventName, eventParam){
         if(Polymer.Element){
-          this.dispatchEvent(new CustomEvent(eventName, eventParam));
+          this.dispatchEvent(new CustomEvent(eventName, {detail: eventParam}));
         } else {
           this.fire(eventName, eventParam); //Version 1.x
         }

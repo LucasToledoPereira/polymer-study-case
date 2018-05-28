@@ -18,7 +18,7 @@
 			disabled$="[[disabled]]"
 			multiple$="[[multiple]]"
 			required$="[[required]]"
-			search-bar$="[[searchBar]]"
+			search-bar$="[[_searchBar()]]"
 			size$="[[size]]"
 			name$="[[name]]"
 			value-name$="[[valueName]]"
@@ -28,7 +28,7 @@
 		>
     </select>
 
-    <template id="searchIf" is="dom-if" if="[[searchBar]]">
+    <template id="searchIf" is="dom-if" if="[[_searchBar()]]">
 			<div class="search-bar">
           <input on-input='_doFilter' id="inputSearch" disabled$="[[disabled]]" tabindex="-1" type="search">
       </div>
@@ -45,6 +45,11 @@
       constructor() { super(); } 
 
       static get is() { return 'dgt-select'; }
+
+      //Used to fix problem when execute at Polymer v1.x
+      _searchBar() {
+        return this.hasAttribute('search-bar');
+      }
       
       static get properties() {
         return {

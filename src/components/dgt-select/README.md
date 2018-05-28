@@ -35,6 +35,23 @@ This component implements a HTML Select and Options using Polymer Webcomponents
 * **setSelectedIndexes** - *Params: indexes (Array | Number)* - Used to select options by indexes
 * **getVisibleItemsIndexes** - *Params: NONE* - Used to get indexes of available options
 
+### Events
+* **change** - Fired when the selection change
+    * *Parameters:*
+        - ```evt``` : ```Event``` : Object that has a property called ```detail```, it contains an Object with the changed flag.
+* **selectItem** - Fired when an item is selected
+    * *Parameters:*
+        - ```evt``` : ```Event``` : Object that has a property called ```detail```, it contains the selected item. This item can be a String or an Object.
+* **deselectItem** - Fired when an item is deselected
+    * *Parameters:*
+        - ```evt``` : ```Event``` : Object that has a property called ```detail```, it contains the deselected itemo. This item can be a String or an Object.
+* **addItems** - Fired when add new items to select
+    * *Parameters:*
+        - ```evt``` : ```Event``` : Object that has a property called ```detail```, it contains an Array with added items.
+* **removeItems** - Fired when remove items
+    * *Parameters:*
+        - ```evt``` : ```Event``` : Object that has a property called ```detail```, it contains an Array with removed items.
+
 
 ### Usage
 You can use this component like the flowing code:

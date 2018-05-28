@@ -1,5 +1,5 @@
 <!-- Load the Polymer.Element base class -->
-<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../bower_components/polymer/lib/elements/dom-repeat.html">
 <link rel="import" href="dgt-select-style.html">
 
@@ -41,7 +41,7 @@
   </template>
   <script>
     
-    class DgtSelect extends Polymer.Element {
+    class DgtSelect extends PolymerMixinElement(Polymer.Element) {
       constructor() { super(); } 
 
       static get is() { return 'dgt-select'; }
@@ -96,8 +96,7 @@
       _handleChangeSelect(evt) {
         this._fireEvent('change', {changed: true});
 				if(evt.target.selectedIndex >= 0) {
-          let options = this.shadowRoot.querySelectorAll('option');
-					//var options = this.querySelectorAll('option');
+          let options = this._getShadowElement().querySelectorAll('option');
           this._fireEvent('selectItem', options[evt.target.selectedIndex].rawValue);
 				}
 			}
@@ -123,14 +122,13 @@
 			}
 
       _doFilter(evt) {
-          let searchTerm = this.shadowRoot.querySelector('input').value;
+          let searchTerm = this._getShadowElement().querySelector('input').value;
           this.filter(searchTerm);
       }
 
       filter(searchTerm) {
         searchTerm = searchTerm.toLowerCase();
-        let elOptions = this.shadowRoot.querySelectorAll('select option');
-        //let elOptions = this.querySelectorAll('select option');
+        let elOptions = this._getShadowElement().querySelectorAll('select option');
 
         elOptions.forEach(el => {
           if(el.text.toLowerCase().indexOf(searchTerm) === -1){
@@ -184,8 +182,7 @@
       }
 
       _handlerSort() {
-        let optionElements = this._moveOptionToArray(this.shadowRoot.querySelectorAll('option'));
-        //let optionElements = this._moveOptionToArray(this.querySelectorAll("option"));
+        let optionElements = this._moveOptionToArray(this._getShadowElement().querySelectorAll('option'));
         if(optionElements.length == 0){
           return;
         }
@@ -208,8 +205,7 @@
 				let optionElements = this._createOptions(newItems);
 
 				if(this.sort){
-          optionElements = this._moveOptionToArray(this.shadowRoot.querySelectorAll('option')).concat(optionElements);
-					//optionElements = this._moveOptionToArray(this.querySelectorAll("option")).concat(optionElements);
+          optionElements = this._moveOptionToArray(this._getShadowElement().querySelectorAll('option')).concat(optionElements);
 					optionElements = this._sortList(optionElements);
 					this.clearItems();
 				}
@@ -229,8 +225,7 @@
 					items = [items];
 				}
 				let itemsRemoved = [];
-        let elOptions = this.shadowRoot.querySelectorAll('select option')
-				//let elOptions = this.querySelectorAll('select option');
+        let elOptions = this._getShadowElement().querySelectorAll('select option');
 
         items.forEach(((item) => {
           let value = this._getAttrib(item, this.valueName);
@@ -260,8 +255,7 @@
           items = [items];
         }
 
-        let elOptions = this.shadowRoot.querySelectorAll('select option');
-	      //let elOptions = this.querySelectorAll('select option');
+        let elOptions = this._getShadowElement().querySelectorAll('select option');
 
         items.forEach(((item) => {
           let value = this._getAttrib(item, this.valueName),
@@ -285,8 +279,7 @@
           items = [items];
         }
 
-        let elOptions = this.shadowRoot.querySelectorAll('select option')
-	      //let elOptions = this.querySelectorAll('select option');
+        let elOptions = this._getShadowElement().querySelectorAll('select option');
 
         items.forEach((item => {
           let value = this._getAttrib(item, this.valueName);
@@ -329,14 +322,16 @@
 
       _createDomReferences() {
         this.idSelect = (this.id + 'select') || (Math.random()*1000+1);
-        this.select = this.shadowRoot.getElementById(this.idSelect);
+        this.select = this._getShadowElement().querySelector("#" +this.idSelect);
       }
 
       _loadDeclaredOptions() {
-        let options = Array.from(this.$.declaredOptionsWrapper.children);
-        this.$.declaredOptionsWrapper.parentNode.removeChild(this.$.declaredOptionsWrapper);
-        delete this.$['declaredOptionsWrapper'];
-        this.addItems(options);
+        if(this.$.declaredOptionsWrapper){
+          let options = Array.from(this.$.declaredOptionsWrapper.children);
+          this.$.declaredOptionsWrapper.parentNode.removeChild(this.$.declaredOptionsWrapper);
+          delete this.$['declaredOptionsWrapper'];
+          this.addItems(options);
+        }
       }
 
       ready() {
@@ -345,7 +340,7 @@
         this.isIE = this._isInternetExplorer();
         this.valueName = this.valueName || "";
         this.labelName = this.labelName || "";
-        //this._loadDeclaredOptions();
+        this._loadDeclaredOptions();
       }
 
       attached() {
@@ -373,8 +368,7 @@
       }
 
       clear() {
-        let elOptions = this.shadowRoot.querySelectorAll('select option');
-        //var elOptions = this.querySelectorAll('select option');
+        let elOptions = this._getShadowElement().querySelectorAll('select option');
         elOptions.forEach(el => el.selected = false);
 
         this.classList.remove('invalid');
@@ -412,8 +406,7 @@
             indexes = [indexes];
         }
 
-        let elOptions = this.shadowRoot.querySelectorAll('select option');
-        //let elOptions = this.querySelectorAll('select option');
+        let elOptions = this._getShadowElement().querySelectorAll('select option');
         elOptions.forEach(el => el.selected = (indexes.indexOf !== -1));            
       }
 
@@ -429,8 +422,16 @@
           this.fire(eventName, eventParam); //Version 1.x
         }
       }
+
+      _getShadowElement(){
+        return this.shadowRoot || this;
+      }
     }
-    
-    customElements.define(DgtSelect.is, DgtSelect);
+
+    if(Polymer.Element){
+		  customElements.define(DgtSelect.is, DgtSelect);
+	  } else {
+		  Polymer(DgtSelect);
+	  }
   </script>
 </dom-module>

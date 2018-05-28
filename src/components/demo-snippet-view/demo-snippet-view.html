@@ -1,5 +1,5 @@
 
-<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../bower_components/marked-element/marked-element.html">
 <link rel="import" href="../../../bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
 <link rel="import" href="../../../bower_components/prism-element/prism-highlighter.html">
@@ -72,7 +72,7 @@
   </template>
 
   <script> 
-    class DemoSnippetView extends Polymer.Element {
+    class DemoSnippetView extends PolymerMixinElement(Polymer.Element) {
         static get is() { return 'demo-snippet-view'; }
 
         static get properties() {
@@ -86,9 +86,12 @@
         constructor() {
             super();
         }
-
     }
-    
-    customElements.define(DemoSnippetView.is, DemoSnippetView);
+
+    if(Polymer.Element){
+        customElements.define(DemoSnippetView.is, DemoSnippetView);
+    } else {
+        Polymer(DgtSelect);
+    }
   </script>
 </dom-module>

@@ -59,7 +59,7 @@
   </template>
 
   <script> 
-    class SelectDemo extends Polymer.Element {
+    class SelectDemo extends PolymerMixinElement(Polymer.Element) {
       constructor() { super(); }
       static get is() { return 'dgt-select-demo'; }
 
@@ -358,6 +358,12 @@
 
     }
     
-    customElements.define(SelectDemo.is, SelectDemo);
+    if(Polymer.Element){
+		  customElements.define(SelectDemo.is, SelectDemo);
+	  } else {
+		  Polymer(DgtSelect);
+	  }
+    
+    
   </script>
 </dom-module>

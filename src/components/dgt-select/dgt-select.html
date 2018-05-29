@@ -1,12 +1,14 @@
 <!-- Load the Polymer.Element base class -->
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../bower_components/polymer/lib/elements/dom-repeat.html">
-<link rel="import" href="dgt-select-style.html">
 
 <dom-module id="dgt-select">
   <!-- Defines the element's style and local DOM -->
   <template>
-    <style include="dgt-select-style"></style>
+    <custom-style>
+        <link rel="stylesheet" href="./src/dgt-style/css/dgt-style.css" type="text/css">
+        <link rel="stylesheet" href="./src/components/dgt-select/css/dgt-select.css" type="text/css">
+    </custom-style>
     <template is="dom-if" if="{{dgterror}}">
 			<div class="dgt-error-msg">{{dgterror}}</div>
     </template>
@@ -79,11 +81,10 @@
         options.forEach(((option) => {
           let optionElement;
 					if (option instanceof Node) {
-					  if (option.tagName !== 'OPTION') {
-                throw new Error("Can't use tags other than <option> inside dgt-select");
+					  if (option.tagName === 'OPTION') {
+              optionElement = option;
+              optionElement.rawValue = option.value || option.innerText;
             }
-            optionElement = option;
-					  optionElement.rawValue = option.value || option.innerText;
           } else {
             optionElement = document.createElement('option');
             optionElement.innerText = this._getAttrib(option, this.labelName);
@@ -91,8 +92,8 @@
             optionElement.rawValue = option;
           }
 
-				optionElement.addEventListener('click', this._handleOptionClick.bind(this));
-				optionElements.push(optionElement);
+				  optionElement && optionElement.addEventListener('click', this._handleOptionClick.bind(this));
+				  optionElement && optionElements.push(optionElement);
 				}).bind(this));
 
         return optionElements;
@@ -153,7 +154,7 @@
               let span = el.parentElement;
               if(span.tagName === 'SPAN'){
                 this.select.insertBefore(el, span);
-                span.remove();
+                span.removeNode();
               }
             }
           }

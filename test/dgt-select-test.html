@@ -8,6 +8,7 @@
 
     <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <script src="../bower_components/web-component-tester/browser.js"></script>
+    <script src="../src/utils/polymer-mixin.js"></script>
 
     <link rel="import" href="../src/components/dgt-select/dgt-select.html">
   </head>
@@ -97,12 +98,9 @@
           assert.equal(items.length, 1);
         });
 
-
         function getItem(index){
           return "Item " + index; 
         }
-
-
       });
     </script>
   </body>

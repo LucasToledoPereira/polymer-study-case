@@ -7,53 +7,37 @@
 
 <dom-module id="demo-snippet-view">
   <template>
-
-        <custom-style>
-                <style is="custom-style" include="demo-pages-shared-styles prism-theme-default">
-                    :host {
-                        display: block;
-                        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-                                    0 1px 5px 0 rgba(0, 0, 0, 0.12),
-                                    0 3px 1px -2px rgba(0, 0, 0, 0.2);
-                        margin-bottom: 40px;
-                        @apply --demo-snippet;
-                    }
-                    .demo {
-                        display: block;
-                        border-bottom: 1px solid #e0e0e0;
-                        background-color: white;
-                        margin: 0;
-                        padding: 20px;
-                        @apply --demo-snippet-demo;
-                    }
-                    .code-container {
-                        margin: 0;
-                        background-color: #f5f5f5;
-                        font-size: 13px;
-                        overflow: auto;
-                        position: relative;
-                        padding: 0 20px;
-                        @apply --demo-snippet-code;
-                    }
-                    .code {
-                        padding: 20px;
-                        margin: 0;
-                        background-color: var(--google-grey-100);
-                        font-size: 13px;
-                        overflow: auto;
-                        @apply --demo-snippet-code;
-                    }
-                    .code > pre {
-                        margin: 0;
-                        padding: 0 0 10px 0;
-                    }
-                    .centered {
-                        max-width: 75%;
-                        margin-left: auto;
-                        margin-right: auto;
-                    }
-                </style>
-            </custom-style>
+    <link rel="stylesheet" href="./src/dgt-style/css/dgt-style.css" type="text/css">
+    <custom-style>
+            <style is="custom-style" include="demo-pages-shared-styles prism-theme-default">
+                .code-container {
+                    margin: 0;
+                    background-color: #f5f5f5;
+                    font-size: 13px;
+                    overflow: auto;
+                    position: relative;
+                    padding: 0 20px;
+                    @apply --demo-snippet-code;
+                }
+                .code {
+                    padding: 20px;
+                    margin: 0;
+                    background-color: var(--google-grey-100);
+                    font-size: 13px;
+                    overflow: auto;
+                    @apply --demo-snippet-code;
+                }
+                .code > pre {
+                    margin: 0;
+                    padding: 0 0 10px 0;
+                }
+                .centered {
+                    max-width: 75%;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+            </style>
+        </custom-style>
     <div class="vertical-section-container centered">
         <slot name="title"></slot>
 
